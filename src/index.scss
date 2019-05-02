@@ -1,0 +1,8 @@
+@import '../node_modules/bulma/bulma.sass';
+
+$primary: hsl(48, 100%, 67%);
+
+$navbar-item-hover-color: $grey-dark;
+$navbar-item-hover-background-color: $primary;
+
+$navbar-padding-vertical: 2rem;
