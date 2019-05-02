@@ -4,28 +4,18 @@ class Products extends React.Component {
     constructor(){
         super();
         this.state={
-            products:[]
-        }
+            products: []
+        };
+        this.askForProducts = this.askForProducts.bind(this)
     }
 
     askForProducts(){
+        var listOfProducts = []
         fetch('http://localhost:4500/api/products')
             .then(response => response.json())
-            .then(products =>{
-                console.log(products)
-                products.results.forEach(product => {
-                    let data = {
-                        name: product.productName,
-                        description: product.productDescription,
-                        price: product.productPrice,
-                        seller: product.productSeller,
-                        category: product.productCategory,
-                        img: product.productImg 
-                    }
-                    this.setState({ products: this.state.products.concat([data]) })
-                })
+            .then((products) => {
+                this.setState({products: products})
             })
-            
     }
 
     render(){
