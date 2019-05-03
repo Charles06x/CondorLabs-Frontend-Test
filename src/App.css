@@ -53,3 +53,7 @@
 .product-name{
   font-weight: 700;
 }
+
+.description{
+  min-height: 150px;
+}

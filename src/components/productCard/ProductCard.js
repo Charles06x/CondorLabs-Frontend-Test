@@ -1,15 +1,17 @@
 import React from 'react';
+import Link from 'react-router-dom/Link';
 
 class ProductCard extends React.Component {
 
     
     render() {
-         const {productName, productPrice, productCategory, productDescription, productSeller, productImg} = this.props.product;
+         const {productName, productPrice, productImg} = this.props.product;
+         const prod = this.props.product;
         
-        console.log("Props name: ", productName)
+        console.log("Props name: ", prod)
         return(
             <div className="card has-shadow">
-                <a href="#">
+                <Link to={'/products/'+productName}>
                     <div className="card-image image is-2by1">
                         <figure>
                             <img className="cardImg" src={productImg} alt="image for product"/>
@@ -22,7 +24,7 @@ class ProductCard extends React.Component {
                             <p className="subtitle is-6">$ {productPrice}</p>
                         </div>
                     </div>
-                </a>
+                </Link>
                 
 
                 <footer className="card-footer">
