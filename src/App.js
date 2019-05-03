@@ -1,6 +1,7 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
+import './App.sass';
 import '../src/components/products/Products';
 
 import Auth from './services/auth'
@@ -44,7 +45,7 @@ class App extends React.Component {
     return (
       <div>
         <NavBarMenu />
-        <div className="container">
+        <div className="container content">
           <Products />
         </div>
       </div>

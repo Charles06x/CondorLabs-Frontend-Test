@@ -31,3 +31,17 @@
     transform: rotate(360deg);
   }
 }
+
+.content {
+  padding-top: 30px;
+  }
+
+.card {
+  box-shadow: -7px 11px 25px -9px rgba(0,0,0,1) !important; 
+}
+
+.cart {
+  background-color: hsl(48, 100%, 67%);
+  color: white;
+  font-weight: 700;
+}

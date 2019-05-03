@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import ProductCard from '../productCard/ProductCard';
 
 class Products extends React.Component {
     constructor(){
@@ -6,24 +7,31 @@ class Products extends React.Component {
         this.state={
             products: []
         };
-        this.askForProducts = this.askForProducts.bind(this)
+        //this.askForProducts = this.askForProducts.bind(this)
     }
 
-    askForProducts(){
-        var listOfProducts = []
+    componentDidMount(){
         fetch('http://localhost:4500/api/products')
+        //fetch('https://reqres.in/api/users')
             .then(response => response.json())
             .then((products) => {
-                this.setState({products: products})
+                this.setState({products: products.products})
             })
     }
 
     render(){
+        const {products} = this.state
         return(
-            <div>
-                <button onClick={this.askForProducts} className="button is-primary">Pedir datos</button>
-                {this.state.products}
+            <div className="columns is-multiline">
+                {products.map(product => {
+                    return(
+                        <div className="column is-one-quarter">
+                            <ProductCard product={product} />
+                        </div>
+                    )
+                })}
             </div>
+           
         )
     }
 }
