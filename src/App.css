@@ -45,3 +45,11 @@
   color: white;
   font-weight: 700;
 }
+
+.cardImg {
+  padding: 20px;
+}
+
+.product-name{
+  font-weight: 700;
+}

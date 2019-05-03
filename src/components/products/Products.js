@@ -25,8 +25,8 @@ class Products extends React.Component {
         const {products} = this.state
         if(products.length === 0){
             return(
-                <div className="columns is-vcentered">
-                    <div className="column is-half">
+                <div className="columns">
+                    <div className="column">
                         <a class="button is-loading">Loading</a> 
                     </div>
                    
@@ -38,7 +38,7 @@ class Products extends React.Component {
                 <div className="columns is-multiline">
                     {products.map(product => {
                         return(
-                            <div className="column is-one-quarter">
+                            <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
                                 <ProductCard product={product} />
                             </div>
                         )

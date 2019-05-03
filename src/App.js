@@ -3,9 +3,16 @@ import React from 'react';
 import './App.css';
 import '../src/components/products/Products';
 
+import { BrowserRouter as Router } from 'react-router-dom';
+import Route from 'react-router-dom/Route';
+import Switch from 'react-router-dom/Switch';
+import Redirect from 'react-router-dom/Redirect'
+import Link from 'react-router-dom/Link'
+
 import Auth from './services/auth'
 import Products from '../src/components/products/Products';
-
+import ProductsByCategory from '../src/components/productsByCategory/productsByCategory';
+import ProductsDetails from '../src/components/productsDetails/productsDetails';
 
 const logo = 'https://bit.ly/2IVk4lW';  //Contains the logo image in png format.
 
@@ -29,9 +36,9 @@ class NavBarMenu extends React.Component {
             </div>
 
             <div className="navbar-end">
-              <a href="#" className="navbar-item">Home</a>
-              <a href="#" className="navbar-item">Categories</a>
-              <a href="#" className="navbar-item">About</a>
+              <Link to={'/products'} className="navbar-item">Home</Link>
+              <Link to={'/products-details'} className="navbar-item">Categories</Link>
+              <Link to={'/products'} className="navbar-item">About</Link>
             </div>
           </div>
         </nav>
@@ -44,10 +51,22 @@ class App extends React.Component {
   render(){
     return (
       <div>
+      <Router>
         <NavBarMenu />
         <div className="container content">
-          <Products />
+          
+            <Switch>
+                <Route exact path="/products" component={Products} />
+                <Route exact path="/products-details" component={ProductsDetails} />
+                <Route exact path="/categories/:category/products" component={ProductsByCategory} />
+                
+                <Redirect from={'/'} to={'/products'} />
+            </Switch>
+          
         </div>
+        
+        
+        </Router>
       </div>
     
     )
