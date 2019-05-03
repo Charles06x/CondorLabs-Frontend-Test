@@ -1,11 +1,11 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import './App.sass';
 import '../src/components/products/Products';
 
 import Auth from './services/auth'
 import Products from '../src/components/products/Products';
+
 
 const logo = 'https://bit.ly/2IVk4lW';  //Contains the logo image in png format.
 

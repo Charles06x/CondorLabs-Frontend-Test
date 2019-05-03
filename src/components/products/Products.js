@@ -1,6 +1,9 @@
 import React from 'react';
 import ProductCard from '../productCard/ProductCard';
 
+import axios from 'axios';
+
+
 class Products extends React.Component {
     constructor(){
         super();
@@ -12,7 +15,6 @@ class Products extends React.Component {
 
     componentDidMount(){
         fetch('http://localhost:4500/api/products')
-        //fetch('https://reqres.in/api/users')
             .then(response => response.json())
             .then((products) => {
                 this.setState({products: products.products})
@@ -21,18 +23,31 @@ class Products extends React.Component {
 
     render(){
         const {products} = this.state
-        return(
-            <div className="columns is-multiline">
-                {products.map(product => {
-                    return(
-                        <div className="column is-one-quarter">
-                            <ProductCard product={product} />
-                        </div>
-                    )
-                })}
-            </div>
-           
-        )
+        if(products.length === 0){
+            return(
+                <div className="columns is-vcentered">
+                    <div className="column is-half">
+                        <a class="button is-loading">Loading</a> 
+                    </div>
+                   
+                </div>
+                
+            ) 
+        }else{
+            return(
+                <div className="columns is-multiline">
+                    {products.map(product => {
+                        return(
+                            <div className="column is-one-quarter">
+                                <ProductCard product={product} />
+                            </div>
+                        )
+                    })}
+                </div>
+            
+            )
+        }
+        
     }
 }
 
