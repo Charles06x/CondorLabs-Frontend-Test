@@ -15,11 +15,10 @@ class Products extends React.Component {
     }
 
     componentDidMount(){
-        fetch('http://localhost:4500/api/products')
-            .then(response => response.json())
-            .then((products) => {
-                this.setState({products: products.products})
-            })
+        axios.get('http://localhost:4500/api/products')
+                .then(products => {
+                    this.setState({products: products.data.products})
+                })
     }
 
     render(){

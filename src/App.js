@@ -38,7 +38,7 @@ class App extends React.Component {
                 <Route exact path="/cart" component={CartModal} />
                 <Route exact path="/products" component={Products} />
                 <Route exact path="/categories" component={ProductsByCategory} />
-                <Route exact path="/categories/:category/products" component={ProductsByCategory} />
+                <Route exact path="/:category/products" component={ProductsByCategory} />
                 <Route exact path="/products/:productName" component={ProductsDetails} />
                 <Route exact path="/about" component={About} />
                 

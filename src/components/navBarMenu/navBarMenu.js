@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import Link from 'react-router-dom/Link'
+import Axios from 'axios';
 
 export default class NavBarMenu extends React.Component {
 
@@ -9,17 +10,16 @@ export default class NavBarMenu extends React.Component {
     this.state={
         categories: []
     };
-    //this.askForProducts = this.askForProducts.bind(this)
+    
 }
 
   componentDidMount(){
-    fetch('http://localhost:4500/api/categories')
-        .then(response => response.json())
-        .then((categories) => {
-            this.setState({categories: categories.categories})
-            console.log("Cccccc ",categories.categories)
-        })
-}
+    Axios('http://localhost:4500/api/categories')
+      .then(response => {
+        console.log("kkk", response.data.categories);
+        this.setState({categories: response.data.categories})
+    })
+  }
 
     render() {
       const {categories} = this.state
@@ -50,8 +50,8 @@ export default class NavBarMenu extends React.Component {
 
                     {categories.map(category => {
                       return(
-                        <Link className="navbar-item">
-                          {category.categoryName}
+                        <Link className="navbar-item" to={"/"+category+"/products"}>
+                          {category}
                         </Link>
                       )
                     })}
