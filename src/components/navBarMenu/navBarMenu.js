@@ -50,7 +50,7 @@ export default class NavBarMenu extends React.Component {
 
                     {categories.map(category => {
                       return(
-                        <Link className="navbar-item" to={"/"+category+"/products"}>
+                        <Link className="navbar-item" to={"/"+category+""}>
                           {category}
                         </Link>
                       )
