@@ -8,9 +8,10 @@ export default class NavBarMenu extends React.Component {
   constructor(){
     super();
     this.state={
-        categories: []
-    };
-    
+        categories: [],
+        keyword: String
+      };    
+      this.handleChange = this.handleChange.bind(this)
 }
 
   componentDidMount(){
@@ -19,6 +20,11 @@ export default class NavBarMenu extends React.Component {
         console.log("kkk", response.data.categories);
         this.setState({categories: response.data.categories})
     })
+  }
+
+  handleChange(e){
+    console.log(e.target.value)
+    this.setState({keyword: e.target.value})
   }
 
     render() {
@@ -32,7 +38,8 @@ export default class NavBarMenu extends React.Component {
               </div>
               <div className="navbar-start">
                 <div className="navbar-item">
-                  <input className="input is-rounded is-warning is-medium navbar-padding-vertical" type="text" placeholder="Search"/>
+                  <input onChange={this.handleChange} className="input is-rounded is-warning is-medium navbar-padding-vertical" type="text" placeholder="Search"/>
+                  <button className="button is-warning is-rounded is-medium"> <Link to={"/search/"+this.state.keyword}>Search</Link> </button>
                 </div>
                 
               </div>
@@ -42,7 +49,7 @@ export default class NavBarMenu extends React.Component {
                 <Link to={'/products'} className="navbar-item">Home</Link>
   
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <Link className="navbar-link" to={'/categories'}>
+                  <Link className="navbar-link">
                     Categories
                   </Link>
   
@@ -50,7 +57,7 @@ export default class NavBarMenu extends React.Component {
 
                     {categories.map(category => {
                       return(
-                        <Link className="navbar-item" to={"/"+category+""}>
+                        <Link onClick={this.updateState} className="navbar-item" to={"/"+category+"/products"}>
                           {category}
                         </Link>
                       )
@@ -59,7 +66,7 @@ export default class NavBarMenu extends React.Component {
                     
                   </div>
                 </div>
-  
+                <Link to={'/upload-product'} className="navbar-item">Upload Products</Link>
                 <Link to={'/about'} className="navbar-item">About</Link>
               </div>
             </div>

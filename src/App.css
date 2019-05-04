@@ -57,3 +57,7 @@
 .description{
   min-height: 150px;
 }
+
+.boxedlist {
+  padding: 50;
+}

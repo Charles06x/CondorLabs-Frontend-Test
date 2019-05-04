@@ -24,7 +24,7 @@ export default class ProductByCategory extends Component{
           console.log("kkk", response.data.categories);
           this.setState({categories: response.data.categories})
         })
-        if(!this.props.match.params.category){
+        if(!this.props.match.params){
             Axios('http://localhost:4500/api/products')
                 .then(products => {
                     this.setState({products: products.data.product, productsToBeShown: products.data.product})
@@ -32,7 +32,7 @@ export default class ProductByCategory extends Component{
         }else{
             Axios('http://localhost:4500/api/'+this.props.match.params.category.split(' ').join('%20')+'/products')
                 .then(products => {
-                    console.log(products)
+                    console.log("fetched products: ",products)
                     this.setState({products: products.data.product, productsToBeShown: products.data.product})
                 })
         }
@@ -41,8 +41,8 @@ export default class ProductByCategory extends Component{
     updateState(){
         Axios('http://localhost:4500/api/'+this.props.match.params.category.split(' ').join('%20')+'/products')
                 .then(products => {
-                    console.log(products)
-                    this.setState({products: products.data.product, productsToBeShown: products.data.product})
+                    console.log("Executed")
+                    this.setState({productsToBeShown: products.data.product})
                 })
     }
 
@@ -57,8 +57,7 @@ export default class ProductByCategory extends Component{
                            return(
                                <li>
                                    <Link onClick={this.updateState} to={"/"+category+"/products"}>{category}</Link>
-                               </li>
-                               
+                               </li>                               
                            )
                        })}                        
                     </ul>
