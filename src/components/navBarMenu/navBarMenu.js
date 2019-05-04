@@ -3,7 +3,26 @@ import React, {Component} from 'react';
 import Link from 'react-router-dom/Link'
 
 export default class NavBarMenu extends React.Component {
+
+  constructor(){
+    super();
+    this.state={
+        categories: []
+    };
+    //this.askForProducts = this.askForProducts.bind(this)
+}
+
+  componentDidMount(){
+    fetch('http://localhost:4500/api/categories')
+        .then(response => response.json())
+        .then((categories) => {
+            this.setState({categories: categories.categories})
+            console.log("Cccccc ",categories.categories)
+        })
+}
+
     render() {
+      const {categories} = this.state
       return(
         <div >
           <nav className="navbar is-light">
@@ -28,18 +47,16 @@ export default class NavBarMenu extends React.Component {
                   </Link>
   
                   <div className="navbar-dropdown">
-                    <Link className="navbar-item">
-                      Category 1
-                    </Link>
-                    <Link className="navbar-item">
-                      Category 2
-                    </Link>
-                    <Link className="navbar-item">
-                      Category 3
-                    </Link>
-                    <Link className="navbar-item">
-                      Category 4
-                    </Link>
+
+                    {categories.map(category => {
+                      return(
+                        <Link className="navbar-item">
+                          {category.categoryName}
+                        </Link>
+                      )
+                    })}
+
+                    
                   </div>
                 </div>
   

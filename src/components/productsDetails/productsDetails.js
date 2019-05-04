@@ -1,10 +1,12 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import Link from 'react-router-dom/Link';
 
 export default class ProductsDetails extends Component {
     constructor(){
         super()
         this.state={
-            product: Object
+            product: Object,
+            category: Object
         }
     }
 
@@ -12,12 +14,19 @@ export default class ProductsDetails extends Component {
         fetch('http://localhost:4500/api/products/'+this.props.match.params.productName)
             .then(response => response.json())
             .then((product) => {
+                
                 this.setState({product: product.product[0]})
+                fetch('http://localhost:4500/api/category/'+product.product[0].productCategory[0])
+                    .then(response => response.json())
+                    .then((category) => {
+                        this.setState({category: category.category})
+                    })
             })
     }
 
     render() {
         const prod = this.state.product
+        const cat = this.state.category
         console.log("nanana",prod)
         return (
             <div className="container content">
@@ -47,13 +56,16 @@ export default class ProductsDetails extends Component {
                             <div className="column is-full">
                             <p className="is-italic"> There are <span className="has-text-weight-semibold"> {prod.productQuantity} left.</span> </p>
                             </div>
-
+                            <div className="column is-full">
+                                <Link>{cat.categoryName}</Link>
+                            </div>
+                            
 
                             <div className="column is-half">
                                     <button className="button is-info is-fullwidth">Buy</button>
                             </div>
                             <div className="column is-half">
-                                <button className="button is-danger is-outlined is-fullwidth">Add to cart</button>
+                                <button className="button is-success is-outlined is-fullwidth">Add to cart</button>
                             </div>
                         </div>
                     </div>
