@@ -14,8 +14,6 @@ export default class ProductsSearch extends Component{
     }
 
     componentWillReceiveProps(nextProps) {
-
-        console.log("np ", nextProps.match.params.keyword)
         this.setState({kword: nextProps.match.params.keyword})
         Axios('http://localhost:4500/api/products')
         .then(products => {

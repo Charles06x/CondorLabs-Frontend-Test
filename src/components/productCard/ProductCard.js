@@ -2,15 +2,37 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 
 class ProductCard extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            alreadyOnCart: false
+        }
+        this.addToCart = this.addToCart.bind(this);
+    }
 
+    addToCart(newItem) {   //Shopping cart will be manage in local storage.
+        const localCart = localStorage.getItem('cart');
+        const cart = localCart ? JSON.parse(localCart) : [];
+        
+        const inCart = cart.filter( item => item._id === this.props.product._id)
+        if(inCart.length ===0){
+            const updatedCart = [...cart, this.props.product]
+            localStorage.setItem('cart', JSON.stringify(updatedCart))
+        }
+        
+
+    }
+
+    componentDidUpdate(){
+        this.setState({alreadyOnCart: !this.state.alreadyOnCart})
+    }
     
     render() {
          const {productName, productPrice, productImg} = this.props.product;
          const prod = this.props.product;
-        
-        console.log("Props name: ", prod)
         return(
-            <div className="card has-shadow">
+            
+            <div className="card">
                 <Link to={'/products/'+productName}>
                     <div className="card-image image is-2by1">
                         <figure>
@@ -28,8 +50,11 @@ class ProductCard extends React.Component {
                 
 
                 <footer className="card-footer">
-                    <a href="#" className="card-footer-item">Buy</a>
-                    <a href="#" className="card-footer-item cart">Add to cart</a>
+                    <a className="card-footer-item">Buy</a>
+                    {
+                        
+                        (this.state.alreadyOnCart ?  <a onClick={this.addToCart} className="card-footer-item cart">Remove from Cart</a> :  <a onClick={this.addToCart} className="card-footer-item cart">Add to cart</a>)
+                    }
                 </footer>
             </div>
         )

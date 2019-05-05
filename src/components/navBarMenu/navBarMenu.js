@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import Link from 'react-router-dom/Link'
 import Axios from 'axios';
 
-export default class NavBarMenu extends React.Component {
+export default class NavBarMenu extends Component {
 
   constructor(){
     super();
@@ -17,13 +17,11 @@ export default class NavBarMenu extends React.Component {
   componentDidMount(){
     Axios('http://localhost:4500/api/categories')
       .then(response => {
-        console.log("kkk", response.data.categories);
         this.setState({categories: response.data.categories})
     })
   }
 
   handleChange(e){
-    console.log(e.target.value)
     this.setState({keyword: e.target.value})
   }
 

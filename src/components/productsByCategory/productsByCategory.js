@@ -21,7 +21,6 @@ export default class ProductByCategory extends Component{
     componentDidMount(){    //When first mounted the component, shows all products.
         Axios('http://localhost:4500/api/categories')
         .then(response => {
-          console.log("kkk", response.data.categories);
           this.setState({categories: response.data.categories})
         })
         if(!this.props.match.params){
@@ -32,7 +31,6 @@ export default class ProductByCategory extends Component{
         }else{
             Axios('http://localhost:4500/api/'+this.props.match.params.category.split(' ').join('%20')+'/products')
                 .then(products => {
-                    console.log("fetched products: ",products)
                     this.setState({products: products.data.product, productsToBeShown: products.data.product})
                 })
         }
@@ -41,14 +39,12 @@ export default class ProductByCategory extends Component{
     updateState(){
         Axios('http://localhost:4500/api/'+this.props.match.params.category.split(' ').join('%20')+'/products')
                 .then(products => {
-                    console.log("Executed")
                     this.setState({productsToBeShown: products.data.product})
                 })
     }
 
     render() {
         const {categories, productsToBeShown, products} = this.state
-        console.log("rp ",products)
         return(
             <div className="container content">
                 <nav class="breadcrumb" aria-label="breadcrumbs">
