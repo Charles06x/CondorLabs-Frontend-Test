@@ -14,8 +14,7 @@ import NavBarMenu from '../src/components/navBarMenu/navBarMenu';
 import Products from '../src/components/products/Products';
 import ProductsByCategory from '../src/components/productsByCategory/productsByCategory';
 import ProductsDetails from '../src/components/productsDetails/productsDetails';
-import ProductsSearch from '../src/components/productsSearch/productsSearch'
-import CartModal from '../src/components/cartModal/cartModal';
+import ProductsSearch from '../src/components/productsSearch/productsSearch';
 import About from '../src/components/about/about';
 import UploadProduct from '../src/components/uploadProduct/uploadProduct'
 
@@ -37,7 +36,6 @@ class App extends React.Component {
         <div className="">
           
             <Switch>
-                <Route exact path="/cart" component={CartModal} />
                 <Route exact path="/products" component={Products} />
                 <Route exact path="/categories" component={ProductsByCategory} />
                 <Route exact path="/:category/products" component={ProductsByCategory} />

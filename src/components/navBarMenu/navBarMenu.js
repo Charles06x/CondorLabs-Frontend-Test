@@ -3,15 +3,50 @@ import React, {Component} from 'react';
 import Link from 'react-router-dom/Link'
 import Axios from 'axios';
 
+import CartCards from '../cartCards/cartCards'
+
+//Modal Component
+const Modal = ({ children, closeModal, modalState, title }) => {
+  if(!modalState) {
+    return null;
+  }
+  
+  return(
+
+    <div className="modal is-active">
+      <div className="modal-background" onClick={closeModal} />
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">{title}</p>
+          <button className="delete" onClick={closeModal} />
+        </header>
+        <section className="modal-card-body">
+          <div className="content">
+            {children}
+          </div>
+        </section>
+        <footer className="modal-card-foot">
+          <a className="button" onClick={closeModal}>Cancel</a>
+        </footer>
+      </div>
+    </div>
+  );
+}
+
+
+
 export default class NavBarMenu extends Component {
 
   constructor(){
     super();
     this.state={
         categories: [],
-        keyword: String
+        keyword: String,
+        modalState: false, 
+        prods: []
       };    
       this.handleChange = this.handleChange.bind(this)
+      this.toggleModal = this.toggleModal.bind(this);
 }
 
   componentDidMount(){
@@ -19,20 +54,35 @@ export default class NavBarMenu extends Component {
       .then(response => {
         this.setState({categories: response.data.categories})
     })
+
+    const localCart = localStorage.getItem('cart');
+    const cart = localCart ? JSON.parse(localCart) : [];
+    this.setState({prods: cart});
   }
+
 
   handleChange(e){
     this.setState({keyword: e.target.value})
   }
 
+  //Change the state of the modal.
+  toggleModal() {    
+    this.setState((prev, props) => {
+      const newState = !prev.modalState;
+      
+      return { modalState: newState };
+    });
+  }
+
     render() {
-      const {categories} = this.state
+      const {categories, prods} = this.state
       return(
         <div >
           <nav className="navbar is-light">
             <div className="container has-text-centered">
               <div className="navbar-brand">
-                <img src="https://bit.ly/2J8mtsP" alt="CondorMarket Logo" className="is-1by1 is-96x96"/>
+                <Link to={'/products'}><img src="https://bit. ly/2J8mtsP" alt="CondorMarket Logo" className="is-1by1 is-96x96"/></Link>
+                
               </div>
               <div className="navbar-start">
                 <div className="navbar-item">
@@ -43,7 +93,31 @@ export default class NavBarMenu extends Component {
               </div>
   
               <div className="navbar-end">
-                <Link className="navbar-item" to={'/cart'}>Cart</Link>
+              <a className="navbar-item is-primary" onClick={this.toggleModal}>
+                <div className="button is-primary is-rounded has-text-weight-bold">Cart</div>
+              </a>
+
+                <Modal 
+                  closeModal={this.toggleModal}
+                  modalState={this.state.modalState}
+                  title="Shopping Cart"
+                >
+                <section>
+              <div className="columns ">
+                  <div className="column is-3">
+                    {
+                      prods.map(prod => {
+                        return(
+                          <CartCards prod={prod}/>
+                        )
+                      })
+                    }
+                      
+                  </div>
+              </div>
+            </section>
+                </Modal>
+
                 <Link to={'/products'} className="navbar-item">Home</Link>
   
                 <div className="navbar-item has-dropdown is-hoverable">

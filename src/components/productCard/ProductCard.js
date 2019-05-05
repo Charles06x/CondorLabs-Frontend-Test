@@ -4,9 +4,6 @@ import Link from 'react-router-dom/Link';
 class ProductCard extends React.Component {
     constructor(){
         super();
-        this.state = {
-            alreadyOnCart: false
-        }
         this.addToCart = this.addToCart.bind(this);
     }
 
@@ -23,8 +20,8 @@ class ProductCard extends React.Component {
 
     }
 
-    componentDidUpdate(){
-        this.setState({alreadyOnCart: !this.state.alreadyOnCart})
+    shouldComponentUpdate(nextProps, nextState) {
+        return true
     }
     
     render() {
@@ -51,10 +48,7 @@ class ProductCard extends React.Component {
 
                 <footer className="card-footer">
                     <a className="card-footer-item">Buy</a>
-                    {
-                        
-                        (this.state.alreadyOnCart ?  <a onClick={this.addToCart} className="card-footer-item cart">Remove from Cart</a> :  <a onClick={this.addToCart} className="card-footer-item cart">Add to cart</a>)
-                    }
+                    <a onClick={this.addToCart} className="card-footer-item cart">Add to cart</a>
                 </footer>
             </div>
         )
