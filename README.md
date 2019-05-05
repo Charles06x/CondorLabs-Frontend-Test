@@ -1,5 +1,26 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Author
+# Charles Acevedo Díaz
+
+### What does it do?
+This client side application is an e-commerce like webapp that shows products, filter the products by category,
+implements a simple search and manage a shopping cart, whe you can add and delete product for future shopping.
+
+### Technologies used in this project.
+I used ReactJS which is a JavaScript library that helps you to create SPA.
+Also, I used Bulma, for styling the views; which is a CSS framework based on Flexbox, and
+it's pretty simple to implement.
+
+You can find more info about Bulma in its official website: https://bulma.io/
+
+### What data does it use?
+
+The application is fed with the data extracted of the API, also developed by me, that can be found in the following link: 
+https://github.com/Charles06x/CondorLabs-Backend-Test
+
+### Before running the ``(npm | yarn) start``, it is recommended to run the ``npm install`` command
+
 ## Available Scripts
 
 In the project directory, you can run:
