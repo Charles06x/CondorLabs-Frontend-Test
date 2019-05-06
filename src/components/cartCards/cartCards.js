@@ -32,6 +32,7 @@ export default class CartCards extends Component{
                             </div>
                         <div className="tile is-parent is-centered is-2 is-vertical">
                             <div className="tile is-child has-text-centered"><h2 className="has-text-weight-light has-text-grey is-italic">$ {prod.productPrice}</h2> </div>
+                            <label className="has-text-grey is-italic">Quantity</label>
                             <div className="tile is-child"><input type="number" className="input is-medium"/></div>
                             <div className="tile is-child is-centered"> <Link to="/"><button onClick={this.removeFromCart} className="button is-danger is-small">Remove from cart</button></Link></div>
                         </div>

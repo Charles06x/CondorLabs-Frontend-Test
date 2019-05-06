@@ -40,7 +40,7 @@ class ProductCard extends React.Component {
             
             <div className="card">
                 <Link to={'/products/'+_id} product={prod}>
-                    <div className="card-image image is-2by1">
+                    <div className="card-image image is-1by1">
                         <figure>
                             <img className="cardImg" src={productImg} alt="image for product"/>
                         </figure>                    

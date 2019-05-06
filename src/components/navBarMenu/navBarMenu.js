@@ -15,6 +15,7 @@ export default class NavBarMenu extends Component {
         prods: []
       };    
       this.handleChange = this.handleChange.bind(this)
+      this.updateState = this.updateState.bind(this)
 }
 
   componentDidMount(){
@@ -35,7 +36,12 @@ export default class NavBarMenu extends Component {
     this.setState({keyword: e.target.value})
   }
 
- 
+  updateState(){
+    Axios(process.env.REACT_APP_API_BASE_URL+this.props.match.params.category.split(' ').join('%20')+'/products')
+            .then(products => {
+                this.setState({productsToBeShown: products.data.product})
+            })
+  }
 
     render() {
       const {categories, prods} = this.state
@@ -44,7 +50,7 @@ export default class NavBarMenu extends Component {
           <nav className="navbar is-light">
             <div className="container has-text-centered">
               <div className="navbar-brand">
-                <Link to={'/products'}><img src="https://bit. ly/2J8mtsP" alt="CondorMarket Logo" className="is-1by1 is-96x96"/></Link>
+                <Link to={'/products'}><img src="https://res.cloudinary.com/condormarket/image/upload/v1557162547/CondorMarket2_vv9utj.png" alt="CondorMarket Logo" className="is-1by1 is-96x96"/></Link>
                 
               </div>
               <div className="navbar-start">

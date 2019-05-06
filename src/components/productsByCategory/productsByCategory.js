@@ -47,9 +47,9 @@ export default class ProductByCategory extends Component{
         const {categories, productsToBeShown, products} = this.state
         return(
             <div className="container content">
-                <nav class="breadcrumb" aria-label="breadcrumbs">
+                <nav className="breadcrumb" aria-label="breadcrumbs">
                     <ul>
-                       {categories.slice(0,10).map(category => {
+                       {categories.map(category => {
                            return(
                                <li>
                                    <Link onClick={this.updateState} to={"/"+category+"/products"}>{category}</Link>
@@ -58,17 +58,14 @@ export default class ProductByCategory extends Component{
                        })}                        
                     </ul>
                 </nav>
-                <div>
-                    {productsToBeShown.map(product => {
-                        return(
-                            <div className="columns">
-                                <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
-                                    <ProductCard product={product} />
-                                </div>
-                            </div>
-                            
-                        )
-                    })}
+                <div className="columns is-multiline">
+                    {
+                        products.map(product => {
+                        return(  <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+                                <ProductCard product={product} />
+                            </div>)
+                        })
+                    }
                 </div>
             </div>
         )

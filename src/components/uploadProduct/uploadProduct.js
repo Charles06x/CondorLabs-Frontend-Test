@@ -1,4 +1,6 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import Link from 'react-router-dom/Link';
+import { Redirect } from 'react-router-dom/Redirect'
 
 import Axios from 'axios';
 
@@ -7,7 +9,8 @@ export default class UploadProduct extends Component {
         super();
         this.state={
             categories: [],
-            imgUrl: ''
+            imgUrl: '',
+            newProduct: '' 
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -46,16 +49,17 @@ export default class UploadProduct extends Component {
     }
 
     submitProduct(){
-        var bodyData = new FormData();
         console.log(document.getElementById('prodCategory').value)
         console.log(document.getElementById('prodName').value)
 
-        bodyData.append("productName", document.getElementById('prodName').value);
-        bodyData.append("productPrice", document.getElementById('prodPrice').value);
-        bodyData.append("productSeller", document.getElementById('prodSeller').value);
-        bodyData.append("productDescription", document.getElementById('prodDescription').value);
-        bodyData.append("productCategory", document.getElementById('prodCategory').value);
-        bodyData.append("productImg", this.state.imgUrl);
+        var bodyData = {
+            "productName": document.getElementById('prodName').value,
+            "productPrice": document.getElementById('prodPrice').value,
+            "productSeller": document.getElementById('prodSeller').value,
+            "productDescription": document.getElementById('prodDescription').value,
+            "productCategory": document.getElementById('prodCategory').value,
+            "productImg": this.state.imgUrl
+        }
 
         console.log(bodyData)
         
@@ -66,8 +70,8 @@ export default class UploadProduct extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
         .then(response => {
-            console.log(response);
-
+            console.log("post response: ",response);
+            this.setState({newProduct: response.data.product})
         })
         .catch(response => {
             console.log(response);
@@ -77,8 +81,14 @@ export default class UploadProduct extends Component {
     render(){
 
         const {categories} = this.state
+        if (this.state.newProduct._id) {
+            return  <Redirect push to={'/products/'+this.state.newProduct._id} />
+        } else {
+            
+        
         
         return(
+            
 
             <div className="container content">
                 <div className="columns">
@@ -138,7 +148,8 @@ export default class UploadProduct extends Component {
                                 <textarea id="prodDescription" class="textarea" placeholder="Write a description of the product for the users."></textarea>
                                 
                             </div>
-                            <button onClick={this.submitProduct} className="button is-info has-text-weight-bold">Upload Product</button>
+                            <Link to={'/'} product={this.state.newProduct}><button onClick={this.submitProduct} className="button is-info has-text-weight-bold">Upload Product</button></Link>
+                            
                         </div>
                     </div>
                 </div>
@@ -146,5 +157,6 @@ export default class UploadProduct extends Component {
             
 
             </div>)
+        }
     }
 }
