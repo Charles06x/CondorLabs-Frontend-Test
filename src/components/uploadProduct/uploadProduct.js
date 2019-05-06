@@ -10,7 +10,7 @@ export default class UploadProduct extends Component {
         this.state={
             categories: [],
             imgUrl: '',
-            newProduct: '' 
+            newProduct: Object
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -48,7 +48,7 @@ export default class UploadProduct extends Component {
         
     }
 
-    submitProduct(){
+    async submitProduct(){
         console.log(document.getElementById('prodCategory').value)
         console.log(document.getElementById('prodName').value)
 
@@ -72,6 +72,7 @@ export default class UploadProduct extends Component {
         .then(response => {
             console.log("post response: ",response);
             this.setState({newProduct: response.data.product})
+            window.location = "/products/"+response.data.product._id   
         })
         .catch(response => {
             console.log(response);
@@ -81,12 +82,7 @@ export default class UploadProduct extends Component {
     render(){
 
         const {categories} = this.state
-        if (this.state.newProduct._id) {
-            return  <Redirect push to={'/products/'+this.state.newProduct._id} />
-        } else {
-            
-        
-        
+      
         return(
             
 
@@ -148,7 +144,7 @@ export default class UploadProduct extends Component {
                                 <textarea id="prodDescription" class="textarea" placeholder="Write a description of the product for the users."></textarea>
                                 
                             </div>
-                            <Link to={'/'} product={this.state.newProduct}><button onClick={this.submitProduct} className="button is-info has-text-weight-bold">Upload Product</button></Link>
+                            <Link onClick={this.submitProduct} product={this.state.newProduct}><button className="button is-info has-text-weight-bold">Upload Product</button></Link>
                             
                         </div>
                     </div>
@@ -158,5 +154,5 @@ export default class UploadProduct extends Component {
 
             </div>)
         }
-    }
+    
 }
