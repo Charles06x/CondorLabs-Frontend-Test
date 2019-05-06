@@ -13,9 +13,22 @@ export default class ProductsSearch extends Component{
         
     }
 
+    componentDidMount(){
+        this.setState({kword: this.props.match.params.keyword})
+        Axios(process.env.REACT_APP_API_BASE_URL+'products')
+        .then(products => {
+            var filteredProds = products.data.products.filter(product => {
+                const productNameLowerCase = product.productName.toLowerCase();
+                const kwordLowerCase = this.state.kword.toLowerCase();
+                return productNameLowerCase.includes(kwordLowerCase)
+            })
+            this.setState({products: filteredProds})
+        })
+    }
+
     componentWillReceiveProps(nextProps) {
         this.setState({kword: nextProps.match.params.keyword})
-        Axios('http://localhost:4500/api/products')
+        Axios(process.env.REACT_APP_API_BASE_URL+'products')
         .then(products => {
             var filteredProds = products.data.products.filter(product => {
                 const productNameLowerCase = product.productName.toLowerCase();

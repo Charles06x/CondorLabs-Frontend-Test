@@ -7,8 +7,6 @@ import * as serviceWorker from './serviceWorker';
 //import 'bulma/sass/bulma.scss';   //import bulma.css stylesheet.
 import './index.scss';
 
-const apiURL = "http://localhost:4500/api/"
-
 ReactDOM.render(<App />, document.getElementById('root'));
 
 if (module.hot){

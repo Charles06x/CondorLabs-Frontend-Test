@@ -50,10 +50,11 @@ export default class NavBarMenu extends Component {
 }
 
   componentDidMount(){
-    Axios('http://localhost:4500/api/categories')
+    Axios(process.env.REACT_APP_API_BASE_URL+'categories')
       .then(response => {
         this.setState({categories: response.data.categories})
     })
+
 
     const localCart = localStorage.getItem('cart');
     const cart = localCart ? JSON.parse(localCart) : [];
@@ -87,7 +88,7 @@ export default class NavBarMenu extends Component {
               <div className="navbar-start">
                 <div className="navbar-item">
                   <input onChange={this.handleChange} className="input is-rounded is-warning is-medium navbar-padding-vertical" type="text" placeholder="Search"/>
-                  <button className="button is-warning is-rounded is-medium"> <Link to={"/search/"+this.state.keyword}>Search</Link> </button>
+                  <Link to={"/search/"+this.state.keyword}><button className="button is-warning is-rounded is-medium"> Search </button></Link>
                 </div>
                 
               </div>

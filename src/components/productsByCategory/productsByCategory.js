@@ -24,12 +24,12 @@ export default class ProductByCategory extends Component{
           this.setState({categories: response.data.categories})
         })
         if(!this.props.match.params){
-            Axios('http://localhost:4500/api/products')
+            Axios(process.env.REACT_APP_API_BASE_URL+'products')
                 .then(products => {
                     this.setState({products: products.data.product, productsToBeShown: products.data.product})
                 })
         }else{
-            Axios('http://localhost:4500/api/'+this.props.match.params.category.split(' ').join('%20')+'/products')
+            Axios(process.env.REACT_APP_API_BASE_URL+this.props.match.params.category.split(' ').join('%20')+'/products')
                 .then(products => {
                     this.setState({products: products.data.product, productsToBeShown: products.data.product})
                 })
@@ -37,7 +37,7 @@ export default class ProductByCategory extends Component{
     }
 
     updateState(){
-        Axios('http://localhost:4500/api/'+this.props.match.params.category.split(' ').join('%20')+'/products')
+        Axios(process.env.REACT_APP_API_BASE_URL+this.props.match.params.category.split(' ').join('%20')+'/products')
                 .then(products => {
                     this.setState({productsToBeShown: products.data.product})
                 })

@@ -15,7 +15,7 @@ class Products extends React.Component {
     }
 
     componentDidMount(){
-        axios.get('http://localhost:4500/api/products')
+        axios.get(process.env.REACT_APP_API_BASE_URL+'products')
                 .then(products => {
                     this.setState({products: products.data.products})
                 })
