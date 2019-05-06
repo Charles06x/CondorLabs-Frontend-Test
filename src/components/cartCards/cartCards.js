@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Link from 'react-router-dom/Link'
 
 export default class CartCards extends Component{
 
@@ -24,11 +25,15 @@ export default class CartCards extends Component{
                         <div className="tile is-parent is-2">
                             <img className="image is-96x96" src={prod.productImg} alt="image for product"/>
                             </div>
-                        <div className="tile is-parent is-5">{prod.productDescription}</div>
+                        <div className="tile is-parent is-5 has-text-left">
+                            <span className="has-text-weight-bold is-italic">{prod.productName}</span>
+                            <hr className="navbar-divider"/>
+                            {prod.productDescription}
+                            </div>
                         <div className="tile is-parent is-centered is-2 is-vertical">
                             <div className="tile is-child has-text-centered"><h2 className="has-text-weight-light has-text-grey is-italic">$ {prod.productPrice}</h2> </div>
                             <div className="tile is-child"><input type="number" className="input is-medium"/></div>
-                            <div className="tile is-child is-centered"><button onClick={this.removeFromCart} className="button is-danger is-small">Remove from cart</button></div>
+                            <div className="tile is-child is-centered"> <Link to="/cart"><button onClick={this.removeFromCart} className="button is-danger is-small">Remove from cart</button></Link></div>
                         </div>
                     </div>
                     <hr className="navbar-divider"/>

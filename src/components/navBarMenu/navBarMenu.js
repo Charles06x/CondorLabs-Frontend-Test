@@ -5,36 +5,6 @@ import Axios from 'axios';
 
 import CartCards from '../cartCards/cartCards'
 
-//Modal Component
-const Modal = ({ children, closeModal, modalState, title }) => {
-  if(!modalState) {
-    return null;
-  }
-  
-  return(
-
-    <div className="modal is-active">
-      <div className="modal-background" onClick={closeModal} />
-      <div className="modal-card">
-        <header className="modal-card-head">
-          <p className="modal-card-title">{title}</p>
-          <button className="delete" onClick={closeModal} />
-        </header>
-        <section className="modal-card-body">
-          <div className="content">
-            {children}
-          </div>
-        </section>
-        <footer className="modal-card-foot">
-          <a className="button" onClick={closeModal}>Cancel</a>
-        </footer>
-      </div>
-    </div>
-  );
-}
-
-
-
 export default class NavBarMenu extends Component {
 
   constructor(){
@@ -42,11 +12,9 @@ export default class NavBarMenu extends Component {
     this.state={
         categories: [],
         keyword: String,
-        modalState: false, 
         prods: []
       };    
       this.handleChange = this.handleChange.bind(this)
-      this.toggleModal = this.toggleModal.bind(this);
 }
 
   componentDidMount(){
@@ -66,14 +34,7 @@ export default class NavBarMenu extends Component {
     this.setState({keyword: e.target.value})
   }
 
-  //Change the state of the modal.
-  toggleModal() {    
-    this.setState((prev, props) => {
-      const newState = !prev.modalState;
-      
-      return { modalState: newState };
-    });
-  }
+ 
 
     render() {
       const {categories, prods} = this.state
@@ -94,30 +55,9 @@ export default class NavBarMenu extends Component {
               </div>
   
               <div className="navbar-end">
-              <a className="navbar-item is-primary" onClick={this.toggleModal}>
+              <Link className="navbar-item is-primary" to="/cart" >
                 <div className="button is-primary is-rounded has-text-weight-bold">Cart</div>
-              </a>
-
-                <Modal 
-                  closeModal={this.toggleModal}
-                  modalState={this.state.modalState}
-                  title="Shopping Cart"
-                >
-                <section>
-              <div className="columns ">
-                  <div className="column is-3">
-                    {
-                      prods.map(prod => {
-                        return(
-                          <CartCards prod={prod}/>
-                        )
-                      })
-                    }
-                      
-                  </div>
-              </div>
-            </section>
-                </Modal>
+              </Link>
 
                 <Link to={'/products'} className="navbar-item">Home</Link>
   

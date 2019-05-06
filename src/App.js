@@ -15,6 +15,7 @@ import Products from '../src/components/products/Products';
 import ProductsByCategory from '../src/components/productsByCategory/productsByCategory';
 import ProductsDetails from '../src/components/productsDetails/productsDetails';
 import ProductsSearch from '../src/components/productsSearch/productsSearch';
+import Cart from '../src/components/cart/cart'
 import About from '../src/components/about/about';
 import UploadProduct from '../src/components/uploadProduct/uploadProduct'
 
@@ -39,9 +40,10 @@ class App extends React.Component {
                 <Route exact path="/products" component={Products} />
                 <Route exact path="/categories" component={ProductsByCategory} />
                 <Route exact path="/:category/products" component={ProductsByCategory} />
-                <Route exact path="/products/:productName" component={ProductsDetails} />
+                <Route exact path="/products/:id" component={ProductsDetails} />
                 <Route exact path="/search/:keyword" component={ProductsSearch} />
                 <Route exact path="/upload-product" component={UploadProduct}/>
+                <Route exact path="/cart" component={Cart}/>
                 <Route exact path="/about" component={About} />
                 
                 <Redirect from={'/'} to={'/products'} />
