@@ -58,7 +58,7 @@ class ProductCard extends React.Component {
                 <footer className="card-footer">
                     <a className="card-footer-item">Buy</a>
                     {
-                        this.existInCart ?  <a onClick={this.addToCart} className="card-footer-item cart">Add to cart</a> :  <a onClick={this.addToCart} className="card-footer-item cart">Remove from cart</a>
+                        this.existInCart ?  <Link to='/cart' onClick={this.addToCart} className="card-footer-item cart">Add to cart</Link> :  <Link onClick={this.addToCart} className="card-footer-item cart">Remove from cart</Link>
                     }
                    
                 </footer>

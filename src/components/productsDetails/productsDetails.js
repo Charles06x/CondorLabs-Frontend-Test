@@ -74,7 +74,8 @@ export default class ProductsDetails extends Component {
                                     <button className="button is-info is-fullwidth">Buy</button>
                             </div>
                             <div className="column is-half">
-                                <button onClick={this.addToCart} className="button is-success is-outlined is-fullwidth">Add to cart</button>
+                                <Link to="/cart"><button onClick={this.addToCart} className="button is-success is-outlined is-fullwidth">Add to cart</button></Link>
+                                
                             </div>
                         </div>
                     </div>

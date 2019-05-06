@@ -11,7 +11,7 @@ export default class NavBarMenu extends Component {
     super();
     this.state={
         categories: [],
-        keyword: String,
+        keyword: '',
         prods: []
       };    
       this.handleChange = this.handleChange.bind(this)
@@ -31,6 +31,7 @@ export default class NavBarMenu extends Component {
 
 
   handleChange(e){
+
     this.setState({keyword: e.target.value})
   }
 

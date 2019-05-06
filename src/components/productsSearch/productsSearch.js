@@ -7,13 +7,14 @@ export default class ProductsSearch extends Component{
     constructor(){
         super()
         this.state={
-            kword: String,
+            kword: ' ',
             products: []
         }
         
     }
 
     componentDidMount(){
+        
         this.setState({kword: this.props.match.params.keyword})
         Axios(process.env.REACT_APP_API_BASE_URL+'products')
         .then(products => {
@@ -49,16 +50,20 @@ export default class ProductsSearch extends Component{
 
     render(){
         var {products} = this.state
+        
         return(
             <div className="container content">
                 <p className="is-italic">Showing results for "<span className="is-italic has-text-grey-light">{this.state.kword}</span>"</p>
-                {
-                    products.map(product => {
-                    return(  <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
-                            <ProductCard product={product} />
-                        </div>)
-                    })
-                }
+                <div className="columns is-multiline">
+                    {
+                        products.map(product => {
+                        return(  <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd">
+                                <ProductCard product={product} />
+                            </div>)
+                        })
+                    }
+                </div>
+                
             </div>
         )
     }
