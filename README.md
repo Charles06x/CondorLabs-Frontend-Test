@@ -19,6 +19,14 @@ You can find more info about Bulma in its official website: https://bulma.io/
 The application is fed with the data extracted of the API, also developed by me, that can be found in the following link: 
 https://github.com/Charles06x/CondorLabs-Backend-Test
 
+# Requirements
+This App requires the API URL to be set in a .env file, with the following name:
+REACT_APP_API_BASE_URL= <API_URL>
+
+Versions that ensure the correct execution:
+node version: 8.12.0
+npm version: 6.4.1
+
 ### Before running the ``(npm | yarn) start``, it is recommended to run the ``npm install`` command
 
 ## Available Scripts
